@@ -1,0 +1,10 @@
+{
+  "AppOne": {
+    "rest_api_url": "http://localhost:4000/api/app1",
+    "auto_request_freq": 30000
+  },
+  "AppTwo": {
+    "rest_api_url": "http://localhost:4000/api/app1",
+    "auto_request_freq": 60000
+  }
+}

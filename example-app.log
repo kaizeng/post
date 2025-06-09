@@ -1,0 +1,24 @@
+events.js:177
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::4000
+    at Server.setupListenHandle [as _listen2] (net.js:1226:14)
+    at listenInCluster (net.js:1274:12)
+    at Server.listen (net.js:1362:7)
+    at Function.listen (/mnt/c/git/post/node_modules/express/lib/application.js:635:24)
+    at Object.<anonymous> (/mnt/c/git/post/example-app/example-api-app.js:35:5)
+    at Module._compile (internal/modules/cjs/loader.js:774:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:785:10)
+    at Module.load (internal/modules/cjs/loader.js:641:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:556:12)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:837:10)
+Emitted 'error' event at:
+    at emitErrorNT (net.js:1253:8)
+    at processTicksAndRejections (internal/process/task_queues.js:84:9) {
+  code: 'EADDRINUSE',
+  errno: 'EADDRINUSE',
+  syscall: 'listen',
+  address: '::',
+  port: 4000
+}
