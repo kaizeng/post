@@ -1,9 +1,10 @@
-// --------------------------------------------
 // client/src/App.js
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import AppPage from './components/AppPage';
+import LandingPage from './components/LandingPage';
+import './index.css';
 
 function App() {
   const [apps, setApps] = useState([]);
@@ -14,20 +15,19 @@ function App() {
       .then(setApps);
   }, []);
 
-  if (apps.length === 0) return <div className="content">Loading apps…</div>;
-
   return (
-    <div className="app">
-      <Router>
+    <Router>
+      <div className="app">
         <Sidebar apps={apps} />
         <div className="content">
           <Routes>
+            <Route path="/" element={<LandingPage apps={apps} />} />
             <Route path="/app/:name" element={<AppPage />} />
-            <Route path="*" element={<Navigate to={`/app/${apps[0]}`} replace />} />
           </Routes>
         </div>
-      </Router>
-    </div>
+      </div>
+    </Router>
   );
 }
+
 export default App;
