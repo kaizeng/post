@@ -2,10 +2,8 @@ const express = require('express');
 const app = express();
 const PORT = 4000;
 
-// Example data payload for AppOne
+// Static payload used for the example API
 const exampleData = {
-  status: 'ok',
-  timestamp: Date.now(),
   payload: {
     key1: {
       sub_key1: [
@@ -27,8 +25,13 @@ const exampleData = {
 };
 
 // Define the endpoint
+// Include a fresh timestamp for each request
 app.get('/api/app1', (req, res) => {
-  res.json(exampleData);
+  res.json({
+    status: 'ok',
+    timestamp: Date.now(),
+    ...exampleData
+  });
 });
 
 // Start server
