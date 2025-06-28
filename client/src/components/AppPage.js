@@ -14,7 +14,9 @@ function AppPage() {
       try {
         const resp = await fetch(`/api/data/${name}`);
         const json = await resp.json();
-        const apiResult = json.payload;                   // { status, timestamp, payload: {...} }
+        // The endpoint responds with { name, timestamp, payload: apiResult }
+        // where apiResult itself looks like { status, timestamp, payload: {...} }
+        const apiResult = json.payload;
         const actualSections = apiResult.payload || {};
         if (mounted) setSections(actualSections);
       } catch {
