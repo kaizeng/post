@@ -27,11 +27,12 @@ const exampleData = {
 // Define the endpoint
 // Include a fresh timestamp for each request
 app.get('/api/app1', (req, res) => {
-  res.json({
+  const payload = {
     status: 'ok',
     timestamp: Date.now(),
     ...exampleData
-  });
+  };
+  res.json(payload);
 });
 
 // Start server
