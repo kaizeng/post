@@ -12,6 +12,7 @@ function wrap(payload) {
 
 function stockSnapshot() {
   return {
+
     key1: {
       sub_key1: [
         { symbol: 'AAA', price: rand(100, 150) },
@@ -28,11 +29,13 @@ function stockSnapshot() {
         { sector: 'Finance', change: rand(-5, 5) }
       ]
     }
+
   };
 }
 
 function forexSnapshot() {
   return {
+
     key1: {
       sub_key1: [
         { pair: 'EUR/USD', rate: rand(1.05, 1.15) },
@@ -48,6 +51,7 @@ function forexSnapshot() {
         { pair: 'AUD/USD', rate: rand(0.7, 0.8) }
       ]
     }
+
   };
 }
 
