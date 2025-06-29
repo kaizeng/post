@@ -2,41 +2,60 @@ const express = require('express');
 const app = express();
 const PORT = 4000;
 
-// Static payload used for the example API
-const exampleData = {
-  payload: {
-    key1: {
-      sub_key1: [
-        { id: 1, value: 42 },
-        { id: 2, value: 84 }
-      ],
-      sub_key2: [
-        { name: 'Alice', score: 95 },
-        { name: 'Bob', score: 88 }
-      ]
-    },
-    key2: {
-      sub_key3: [
-        { category: 'X', amount: 123 },
-        { category: 'Y', amount: 456 }
-      ]
-    }
-  }
-};
+function rand(min, max) {
+  return +(Math.random() * (max - min) + min).toFixed(2);
+}
 
-// Define the endpoint
-// Include a fresh timestamp for each request
-app.get('/api/app1', (req, res) => {
-  const payload = {
-    status: 'ok',
-    timestamp: Date.now(),
-    ...exampleData
+function wrap(payload) {
+  return { status: 'ok', timestamp: Date.now(), payload };
+}
+
+function stockSnapshot() {
+  return {
+    market: 'stocks',
+    quotes: [
+      { symbol: 'AAA', price: rand(100, 150) },
+      { symbol: 'BBB', price: rand(200, 250) }
+    ]
   };
-  res.json(payload);
+}
+
+function forexSnapshot() {
+  return {
+    market: 'forex',
+    rates: [
+      { pair: 'EUR/USD', rate: rand(1.05, 1.15) },
+      { pair: 'USD/JPY', rate: rand(109, 111) }
+    ]
+  };
+}
+
+function stream(handler) {
+  return (req, res) => {
+    res.setHeader('Content-Type', 'text/event-stream');
+    res.setHeader('Cache-Control', 'no-cache');
+    res.flushHeaders();
+    const interval = setInterval(() => {
+      res.write(`data: ${JSON.stringify(wrap(handler()))}\n\n`);
+    }, 1000);
+    req.on('close', () => clearInterval(interval));
+  };
+}
+
+// JSON endpoints used by the worker
+app.get('/api/app1', (req, res) => {
+  res.json(wrap(stockSnapshot()));
 });
 
-// Start server
+app.get('/api/app2', (req, res) => {
+  res.json(wrap(forexSnapshot()));
+});
+
+// Streaming endpoints for demonstration
+app.get('/api/stream/app1', stream(stockSnapshot));
+app.get('/api/stream/app2', stream(forexSnapshot));
+
 app.listen(PORT, () => {
-  console.log(`Example API server running at http://localhost:${PORT}/api/app1`);
+  console.log(`Example API server running on ${PORT}`);
 });
 
