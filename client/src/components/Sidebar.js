@@ -7,6 +7,14 @@ function Sidebar({ apps }) {
     <aside className="sidebar">
       <h2>Apps</h2>
       <nav>
+        {/* Home button */}
+        <NavLink
+          to="/"
+          end
+          className={({ isActive }) => (isActive ? 'active' : '')}
+        >
+          Home
+        </NavLink>
         {apps.map(name => (
           <NavLink
             key={name}
