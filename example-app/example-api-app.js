@@ -12,21 +12,46 @@ function wrap(payload) {
 
 function stockSnapshot() {
   return {
-    market: 'stocks',
-    quotes: [
-      { symbol: 'AAA', price: rand(100, 150) },
-      { symbol: 'BBB', price: rand(200, 250) }
-    ]
+
+    key1: {
+      sub_key1: [
+        { symbol: 'AAA', price: rand(100, 150) },
+        { symbol: 'BBB', price: rand(200, 250) }
+      ],
+      sub_key2: [
+        { metric: 'volume', value: rand(1000, 5000) },
+        { metric: 'pe_ratio', value: rand(10, 20) }
+      ]
+    },
+    key2: {
+      sub_key3: [
+        { sector: 'Tech', change: rand(-5, 5) },
+        { sector: 'Finance', change: rand(-5, 5) }
+      ]
+    }
+
   };
 }
 
 function forexSnapshot() {
   return {
-    market: 'forex',
-    rates: [
-      { pair: 'EUR/USD', rate: rand(1.05, 1.15) },
-      { pair: 'USD/JPY', rate: rand(109, 111) }
-    ]
+
+    key1: {
+      sub_key1: [
+        { pair: 'EUR/USD', rate: rand(1.05, 1.15) },
+        { pair: 'USD/JPY', rate: rand(109, 111) }
+      ],
+      sub_key2: [
+        { pair: 'GBP/USD', rate: rand(1.2, 1.3) },
+        { pair: 'USD/CAD', rate: rand(1.25, 1.35) }
+      ]
+    },
+    key2: {
+      sub_key3: [
+        { pair: 'AUD/USD', rate: rand(0.7, 0.8) }
+      ]
+    }
+
   };
 }
 
