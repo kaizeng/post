@@ -36,10 +36,18 @@ test('GET /api/apps returns configured app names', async () => {
   expect(res.body).toEqual(expect.arrayContaining(['AppOne', 'AppTwo']));
 });
 
-test('GET /api/data/:appName returns cached data', async () => {
+test('GET /api/data/AppOne returns cached data', async () => {
   await waitFor(() => request('http://localhost:3000').get('/api/data/AppOne'));
   const res = await request('http://localhost:3000').get('/api/data/AppOne');
   expect(res.status).toBe(200);
   expect(res.body.name).toBe('AppOne');
+  expect(res.body.payload.status).toBe('ok');
+});
+
+test('GET /api/data/AppTwo returns cached data', async () => {
+  await waitFor(() => request('http://localhost:3000').get('/api/data/AppTwo'));
+  const res = await request('http://localhost:3000').get('/api/data/AppTwo');
+  expect(res.status).toBe(200);
+  expect(res.body.name).toBe('AppTwo');
   expect(res.body.payload.status).toBe('ok');
 });
