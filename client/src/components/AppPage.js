@@ -1,3 +1,4 @@
+// client/src/components/AppPage.js
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import DataTable from './DataTable';
@@ -7,6 +8,12 @@ function AppPage() {
   const [sections, setSections] = useState({});
   const [activeTab, setActiveTab] = useState('');
 
+  // Clear state on app change
+  useEffect(() => {
+    setSections({});
+    setActiveTab('');
+  }, [name]);
+
   // Fetch and unwrap the payload
   useEffect(() => {
     let mounted = true;
@@ -15,7 +22,7 @@ function AppPage() {
         const resp = await fetch(`/api/data/${name}`);
         const json = await resp.json();
         const apiResult = json.payload;                   // { status, timestamp, payload: {...} }
-        const actualSections = apiResult.payload || {};
+        const actualSections = apiResult && apiResult.payload ? apiResult.payload : {};
         if (mounted) setSections(actualSections);
       } catch {
         if (mounted) setSections({});
@@ -29,13 +36,16 @@ function AppPage() {
     };
   }, [name]);
 
-  // Initialize or update active tab when sections change
+  // Initialize or update active tab when sections loaded
   useEffect(() => {
     const keys = Object.keys(sections);
     if (keys.length > 0) {
-      setActiveTab(prev => keys.includes(prev) ? prev : keys[0]);
+      setActiveTab(prev => (keys.includes(prev) ? prev : keys[0]));
     }
   }, [sections]);
+
+  // Guard: only render when data for activeTab exists
+  const activeSection = sections[activeTab] || {};
 
   return (
     <div className="content">
@@ -54,10 +64,10 @@ function AppPage() {
         ))}
       </div>
 
-      {/* Render only the active tab's tables */}
+      {/* Render only the active tab's tables, guard mapping */}
       {activeTab && (
         <div className="section">
-          {Object.entries(sections[activeTab]).map(([subKey, arr]) => (
+          {Object.entries(activeSection).map(([subKey, arr]) => (
             <div key={subKey} className="section mb-6">
               <h3 className="text-lg mb-2">{subKey}</h3>
               <DataTable data={Array.isArray(arr) ? arr : []} />
