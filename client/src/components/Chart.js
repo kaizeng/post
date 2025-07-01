@@ -1,9 +1,11 @@
 // client/src/components/Chart.js
 // Updated to properly destroy previous Chart instances and avoid "Canvas is already in use" errors
 
+
 import React, { useEffect, useRef } from 'react';
 import ChartJS from 'chart.js/auto';
 function Chart({ data, type = 'line', height = 300 }) {
+
   const canvasRef = useRef(null);
   const chartInstanceRef = useRef(null);
 
@@ -20,6 +22,7 @@ function Chart({ data, type = 'line', height = 300 }) {
     }
 
     // Create new chart
+
     const keys = Object.keys(data[0]);
     const numericKeys = keys.filter(k => typeof data[0][k] === 'number');
     const labelKey = keys.find(k => typeof data[0][k] !== 'number');
@@ -34,6 +37,7 @@ function Chart({ data, type = 'line', height = 300 }) {
           fill: false,
         }))
       },
+
       options: {
         responsive: true,
         maintainAspectRatio: false,
@@ -49,6 +53,7 @@ function Chart({ data, type = 'line', height = 300 }) {
     };
   }, [data, type]);
 
+
   return (
     <div style={{ width: '100%', height: `${height}px` }}>
       <canvas
@@ -58,5 +63,6 @@ function Chart({ data, type = 'line', height = 300 }) {
     </div>
   );
 }
+
 
 export default Chart;
