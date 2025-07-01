@@ -14,14 +14,22 @@ function stockSnapshot() {
   return {
 
     key1: {
-      sub_key1: [
-        { symbol: 'AAA', price: rand(100, 150) },
-        { symbol: 'BBB', price: rand(200, 250) }
-      ],
-      sub_key2: [
-        { metric: 'volume', value: rand(1000, 5000) },
-        { metric: 'pe_ratio', value: rand(10, 20) }
-      ]
+      sub_key1: {
+        display: 'chart',
+        chartType: 'line',
+        data: [
+          { symbol: 'AAA', price: rand(100, 150) },
+          { symbol: 'BBB', price: rand(200, 250) }
+        ]
+      },
+      sub_key2: {
+        display: 'chart',
+        chartType: 'bar',
+        data: [
+          { metric: 'volume', value: rand(1000, 5000) },
+          { metric: 'pe_ratio', value: rand(10, 20) }
+        ]
+      }
     },
     key2: {
       sub_key3: [
@@ -37,14 +45,22 @@ function forexSnapshot() {
   return {
 
     key1: {
-      sub_key1: [
-        { pair: 'EUR/USD', rate: rand(1.05, 1.15) },
-        { pair: 'USD/JPY', rate: rand(109, 111) }
-      ],
-      sub_key2: [
-        { pair: 'GBP/USD', rate: rand(1.2, 1.3) },
-        { pair: 'USD/CAD', rate: rand(1.25, 1.35) }
-      ]
+      sub_key1: {
+        display: 'chart',
+        chartType: 'line',
+        data: [
+          { pair: 'EUR/USD', rate: rand(1.05, 1.15) },
+          { pair: 'USD/JPY', rate: rand(109, 111) }
+        ]
+      },
+      sub_key2: {
+        display: 'chart',
+        chartType: 'bar',
+        data: [
+          { pair: 'GBP/USD', rate: rand(1.2, 1.3) },
+          { pair: 'USD/CAD', rate: rand(1.25, 1.35) }
+        ]
+      }
     },
     key2: {
       sub_key3: [
