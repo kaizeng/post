@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import DataTable from './DataTable';
+import Chart from './Chart';
 
 function AppPage() {
   const { name } = useParams();
@@ -21,7 +22,7 @@ function AppPage() {
       try {
         const resp = await fetch(`/api/data/${name}`);
         const json = await resp.json();
-        const apiResult = json.payload;                   // { status, timestamp, payload: {...} }
+        const apiResult = json.payload; // { status, timestamp, payload: {...} }
         const actualSections = apiResult && apiResult.payload ? apiResult.payload : {};
         if (mounted) setSections(actualSections);
       } catch {
@@ -64,15 +65,26 @@ function AppPage() {
         ))}
       </div>
 
-      {/* Render only the active tab's tables, guard mapping */}
+      {/* Render only the active tab's tables or charts */}
       {activeTab && (
         <div className="section">
-          {Object.entries(activeSection).map(([subKey, arr]) => (
-            <div key={subKey} className="section mb-6">
-              <h3 className="text-lg mb-2">{subKey}</h3>
-              <DataTable data={Array.isArray(arr) ? arr : []} />
-            </div>
-          ))}
+          {Object.entries(activeSection).map(([subKey, value]) => {
+            const isConfig = value && typeof value === 'object' && !Array.isArray(value);
+            const display = isConfig && value.display ? value.display : 'table';
+            const data = isConfig && value.data ? value.data : value;
+            const chartType = isConfig && value.chartType ? value.chartType : 'line';
+
+            return (
+              <div key={subKey} className="section mb-6">
+                <h3 className="text-lg mb-2">{subKey}</h3>
+                {display === 'chart' ? (
+                  <Chart data={Array.isArray(data) ? data : []} type={chartType} />
+                ) : (
+                  <DataTable data={Array.isArray(data) ? data : []} />
+                )}
+              </div>
+            );
+          })}
         </div>
       )}
     </div>

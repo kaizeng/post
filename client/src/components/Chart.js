@@ -3,8 +3,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import ChartJS from 'chart.js/auto';
-
-function Chart({ data }) {
+function Chart({ data, type = 'line', height = 300 }) {
   const canvasRef = useRef(null);
   const chartInstanceRef = useRef(null);
 
@@ -21,11 +20,15 @@ function Chart({ data }) {
     }
 
     // Create new chart
+    const keys = Object.keys(data[0]);
+    const numericKeys = keys.filter(k => typeof data[0][k] === 'number');
+    const labelKey = keys.find(k => typeof data[0][k] !== 'number');
+
     chartInstanceRef.current = new ChartJS(ctx, {
-      type: 'line',
+      type,
       data: {
-        labels: data.map((_, i) => i),
-        datasets: Object.keys(data[0]).map(key => ({
+        labels: labelKey ? data.map(row => row[labelKey]) : data.map((_, i) => i),
+        datasets: numericKeys.map(key => ({
           label: key,
           data: data.map(row => row[key]),
           fill: false,
@@ -44,13 +47,15 @@ function Chart({ data }) {
         chartInstanceRef.current = null;
       }
     };
-  }, [data]);
+  }, [data, type]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      style={{ width: '100%', height: '100%' }}
-    ></canvas>
+    <div style={{ width: '100%', height: `${height}px` }}>
+      <canvas
+        ref={canvasRef}
+        style={{ width: '100%', height: '100%' }}
+      ></canvas>
+    </div>
   );
 }
 
