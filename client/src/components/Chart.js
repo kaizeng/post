@@ -4,7 +4,7 @@
 import React, { useEffect, useRef } from 'react';
 import ChartJS from 'chart.js/auto';
 
-function Chart({ data }) {
+function Chart({ data, type = 'line' }) {
   const canvasRef = useRef(null);
   const chartInstanceRef = useRef(null);
 
@@ -22,7 +22,7 @@ function Chart({ data }) {
 
     // Create new chart
     chartInstanceRef.current = new ChartJS(ctx, {
-      type: 'line',
+      type,
       data: {
         labels: data.map((_, i) => i),
         datasets: Object.keys(data[0]).map(key => ({
@@ -44,7 +44,7 @@ function Chart({ data }) {
         chartInstanceRef.current = null;
       }
     };
-  }, [data]);
+  }, [data, type]);
 
   return (
     <canvas
