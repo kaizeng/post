@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "jest"
+    "test": "jest",
+    "deploy-editor": "bash bin/deploy-editor.sh"
   },
   "dependencies": {
     "chokidar": "^3.5.3",
