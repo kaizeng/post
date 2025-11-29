@@ -71,11 +71,11 @@ function stockSnapshot() {
         { id: 2, symbol: 'B', open: rand(10, 20), high: rand(20, 30), low: rand(5, 10), close: rand(15, 25), vol: rand(1000, 9000), mkt_cap: '2B', pe: rand(10, 50), eps: rand(1, 5), beta: rand(0.5, 1.5) },
         { id: 3, symbol: 'C', open: rand(10, 20), high: rand(20, 30), low: rand(5, 10), close: rand(15, 25), vol: rand(1000, 9000), mkt_cap: '500M', pe: rand(10, 50), eps: rand(1, 5), beta: rand(0.5, 1.5) },
         { id: 4, symbol: 'D', open: rand(10, 20), high: rand(20, 30), low: rand(5, 10), close: rand(15, 25), vol: rand(1000, 9000), mkt_cap: '10B', pe: rand(10, 50), eps: rand(1, 5), beta: rand(0.5, 1.5) },
-        { id: 5, symbol: 'E', open: rand(10, 20), high: rand(20, 30), low: rand(5, 10), close: rand(15, 25), vol: rand(1000, 9000), mkt_cap: '5B', pe: rand(10, 50), eps: rand(1, 5), beta: rand(0.5, 1.5) }
+        { id: 5, symbol: 'E', open: rand(10, 20), high: rand(20, 30), low: rand(5, 10), close: rand(15, 25), vol: rand(1000, 9000), mkt_cap: '5B', pe: rand(10, 50), eps: rand(-1, 5), beta: rand(0.5, 1.5) }
       ],
       "Large Grid": [
         { id: 101, symbol: 'MSFT', name: 'Microsoft', sector: 'Tech', ind: 'Software', cap: '2.5T', price: 330.50, chg: 5.20, chg_p: '1.5%', vol: '30M', avg_vol: '30M', pe: 30, eps: 10, beta: 0.9, div: '0.8%', high52: 360 },
-        { id: 102, symbol: 'AAPL', name: 'Apple Inc', sector: 'Tech', ind: 'Consumer', cap: '2.8T', price: 180.00, chg: -2.50, chg_p: '-1.2%', vol: '50M', avg_vol: '50M', pe: 28, eps: 6, beta: 1.1, div: '0.5%', high52: 198 },
+        { id: 102, symbol: 'AAPL', name: 'Apple Inc', sector: 'Tech', ind: 'Consumer', cap: '2.8T', price: 180.00, chg: -2.50, chg_p: '(1.2%)', vol: '50M', avg_vol: '50M', pe: 28, eps: 6, beta: 1.1, div: '0.5%', high52: 198 },
         { id: 103, symbol: 'GOOGL', name: 'Alphabet', sector: 'Tech', ind: 'Internet', cap: '1.7T', price: 140.20, chg: 3.10, chg_p: '2.1%', vol: '25M', avg_vol: '25M', pe: 25, eps: 5, beta: 1.0, div: '0.0%', high52: 155 },
         { id: 104, symbol: 'AMZN', name: 'Amazon', sector: 'Cons', ind: 'Retail', cap: '1.5T', price: 135.50, chg: -1.20, chg_p: '-0.8%', vol: '40M', avg_vol: '40M', pe: 60, eps: 2, beta: 1.2, div: '0.0%', high52: 150 },
         { id: 105, symbol: 'TSLA', name: 'Tesla Inc', sector: 'Auto', ind: 'Manuf', cap: '800B', price: 245.00, chg: 10.50, chg_p: '4.2%', vol: '100M', avg_vol: '100M', pe: 70, eps: 3, beta: 2.0, div: '0.0%', high52: 300 },
