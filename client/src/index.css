@@ -1,154 +1,262 @@
-/* client/src/index.css - UBS-inspired lightened sidebar & table header */
+/* client/src/index.css - Bloomberg Terminal Theme */
 
 :root {
-    --ubs-red: #DB0011;
-    --gray-100: #f5f5f5;
-    --gray-200: #e0e0e0;
-    --gray-300: #cccccc;
-    --gray-700: #666666;
-    --gray-800: #333333;
-    --black: #000000;
-    --white: #ffffff;
-  }
-  
-  /* RESET & GLOBAL BASE */
-  *, *::before, *::after {
+    /* Color Palette - Bloomberg Dark Theme */
+    --bg-primary: #000000;
+    /* Deep Black */
+    --bg-secondary: #1a1a1a;
+    /* Dark Gray for panels/headers */
+    --bg-tertiary: #333333;
+    /* Lighter Gray for hover/borders */
+
+    --text-primary: #ff9900;
+    /* Bloomberg Amber */
+    --text-secondary: #cccccc;
+    /* Light Gray for labels */
+    --text-muted: #888888;
+    /* Muted text */
+
+    --accent-primary: #ff9900;
+    /* Amber Accent */
+    --accent-hover: #ffad33;
+    /* Lighter Amber */
+
+    --border-color: #333333;
+    /* Dark Border */
+
+    /* Trading Colors - High Contrast */
+    --trade-up: #00ff00;
+    /* Bright Green */
+    --trade-down: #ff0000;
+    /* Bright Red */
+
+    /* Fonts */
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: 'Roboto Mono', 'JetBrains Mono', source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+/* RESET & GLOBAL BASE */
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-  }
-  html, body, #root {
+}
+
+html,
+body,
+#root {
     height: 100%;
-    font-family: 'Roboto', sans-serif;
-    background-color: var(--gray-100);
-    color: var(--black);
-  }
-  
-  /* LAYOUT: SIDEBAR & CONTENT */
-  .app {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* LAYOUT: SIDEBAR & CONTENT */
+.app {
     display: flex;
     height: 100vh;
     overflow: hidden;
-  }
-  
-  .sidebar {
-    width: 16rem;
-    background-color: var(--gray-800);
-    color: var(--white);
+}
+
+.sidebar {
+    width: 18rem;
+    background-color: var(--bg-secondary);
+    border-right: 1px solid var(--border-color);
     padding: 1rem;
     overflow-y: auto;
-  }
-  
-  .content {
-    flex: 1;
-    padding: 1rem;
-    overflow-y: auto;
-    background-color: var(--gray-100);
-  }
-  
-  /* SIDEBAR NAVIGATION */
-  .sidebar h2 {
-    color: var(--gray-300);
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
-  }
-  
-  .sidebar nav a {
-    display: block;
-    padding: 0.5rem 0.75rem;
-    color: var(--gray-300);
-    text-decoration: none;
-    border-left: 4px solid transparent;
-    margin-bottom: 0.25rem;
-    transition: background-color 0.2s, color 0.2s;
-  }
-  .sidebar nav a:hover {
-    background-color: var(--gray-700);
-    color: var(--white);
-  }
-  .sidebar nav a.active {
-    background-color: var(--gray-700);
-    color: var(--white);
-    border-left-color: var(--ubs-red);
-  }
-  
-  /* TABS */
-  .tabs {
     display: flex;
-    border-bottom: 1px solid var(--gray-300);
+    flex-direction: column;
+}
+
+.content {
+    flex: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+    background-color: var(--bg-primary);
+}
+
+/* SIDEBAR NAVIGATION */
+.sidebar h2 {
+    color: var(--text-primary);
+    /* Amber */
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     margin-bottom: 1rem;
-  }
-  
-  .tab-item {
-    padding: 0.25rem 0.5rem;
-    margin-right: 0.25rem;
-    background: transparent;
-    border: none;
-    border-bottom: 2px solid transparent;
-    color: var(--gray-800);
+    font-weight: 700;
+    padding-left: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.sidebar nav a {
+    display: block;
+    padding: 0.6rem 0.75rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: 2px;
+    margin-bottom: 0.25rem;
+    font-size: 0.95rem;
+    transition: all 0.1s ease;
+    font-family: var(--font-mono);
+    /* Mono for terminal feel */
+}
+
+.sidebar nav a:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.sidebar nav a.active {
+    background-color: var(--accent-primary);
+    color: #000000;
+    /* Black text on Amber background */
+    font-weight: 700;
+}
+
+/* TABS */
+.tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 1.5rem;
+    gap: 0.5rem;
+}
+
+.tab-item {
+    padding: 0.5rem 1rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-bottom: none;
+    color: var(--text-secondary);
     cursor: pointer;
-    font-size: 0.875rem;
-    transition: color 0.2s, border-color 0.2s;
-  }
-  .tab-item:hover {
-    color: var(--black);
-  }
-  .tab-item.active {
-    border-color: var(--ubs-red);
-    color: var(--black);
+    font-size: 0.9rem;
     font-weight: 600;
-  }
-  
-  /* SECTION CARD */
-  .section {
-    background-color: var(--white);
-    border: 1px solid var(--gray-200);
-    border-radius: 4px;
-    padding: 0.4rem;
-    margin-bottom: 1rem;
-  }
-  
-  /* TABLE STYLING: COMPACT & MODERN */
-  table {
+    transition: all 0.1s;
+    font-family: var(--font-mono);
+    border-radius: 4px 4px 0 0;
+}
+
+.tab-item:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.tab-item.active {
+    background-color: var(--accent-primary);
+    color: #000000;
+    border-color: var(--accent-primary);
+}
+
+/* SECTION CARD */
+.section {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 0;
+    /* Sharp corners */
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    box-shadow: none;
+}
+
+/* TABLE STYLING: BLOOMBERG GRID */
+/* Note: DataTable.js will use CSS Grid, but basic table styles here for fallback */
+table {
     width: 100%;
     border-collapse: collapse;
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+    color: var(--text-secondary);
+}
+
+thead th {
+    padding: 0.4rem 0.5rem;
+    border-bottom: 1px solid var(--accent-primary);
+    /* Amber line */
+    text-align: right;
+    font-weight: 700;
+    color: var(--accent-primary);
+    /* Amber Headers */
+    text-transform: uppercase;
     font-size: 0.75rem;
-  }
-  
-  thead {
-    background-color: var(--gray-700);
-    color: var(--white);
-  }
-  
-  thead th {
-    padding: 0.2rem 0.4rem;
-    border: 1px solid var(--gray-300);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    background-color: var(--bg-secondary);
+}
+
+thead th:first-child {
     text-align: left;
-  }
-  
-  tbody td {
-    padding: 0.2rem 0.4rem;
-    border: 1px solid var(--gray-200);
-  }
-  
-  tbody tr:nth-child(even) {
-    background-color: var(--gray-100);
-  }
-  
-  /* TYPOGRAPHY UTILITIES */
-  .text-2xl {
+}
+
+tbody td {
+    padding: 0.25rem 0.5rem;
+    /* Very dense */
+    border: 1px solid #333;
+    /* Dark grid lines */
+    text-align: right;
+    color: #ffffff;
+    /* White data for readability */
+    white-space: nowrap;
+}
+
+tbody td:first-child {
+    text-align: left;
+    font-weight: 700;
+    color: var(--accent-primary);
+    /* Amber Symbol/Key */
+}
+
+tbody tr:nth-child(even) {
+    background-color: #111111;
+    /* Very subtle stripe */
+}
+
+tbody tr:hover {
+    background-color: #333333;
+    /* Highlight row */
+    cursor: crosshair;
+}
+
+/* Trading Data Colors */
+.text-green {
+    color: var(--trade-up);
+    font-weight: 700;
+}
+
+.text-red {
+    color: var(--trade-down);
+    font-weight: 700;
+}
+
+/* TYPOGRAPHY UTILITIES */
+.text-2xl {
     font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+    color: var(--accent-primary);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--accent-primary);
+    display: inline-block;
+    padding-bottom: 0.25rem;
+}
+
+.text-lg {
+    font-size: 1.1rem;
     font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #ffffff;
+    font-family: var(--font-mono);
+}
+
+/* MARGIN UTILITIES */
+.mb-4 {
     margin-bottom: 1rem;
-  }
-  
-  .text-lg {
-    font-size: 1rem;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-  }
-  
-  /* MARGIN UTILITIES */
-  .mb-4 { margin-bottom: 1rem; }
-  .mb-6 { margin-bottom: 1.5rem; }
-  
+}
+
+.mb-6 {
+    margin-bottom: 1.5rem;
+}

@@ -21,11 +21,18 @@ function AppPage() {
     async function load() {
       try {
         const resp = await fetch(`/api/data/${name}`);
-        const json = await resp.json();
-        const apiResult = json.payload; // { status, timestamp, payload: {...} }
-        const actualSections = apiResult && apiResult.payload ? apiResult.payload : {};
-        if (mounted) setSections(actualSections);
-      } catch {
+        const text = await resp.text();
+        try {
+          const json = JSON.parse(text);
+          const apiResult = json.payload; // { status, timestamp, payload: {...} }
+          const actualSections = apiResult && apiResult.payload ? apiResult.payload : {};
+          if (mounted) setSections(actualSections);
+        } catch (e) {
+          console.error("JSON Parse Error. Response text:", text);
+          if (mounted) setSections({});
+        }
+      } catch (err) {
+        console.error("Fetch Error:", err);
         if (mounted) setSections({});
       }
     }

@@ -1,60 +1,73 @@
 .landing-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem;
-    background: #ffffff;
-    min-height: 100vh;
-  }
-  
-  .landing-header {
-    text-align: center;
-    margin-bottom: 3rem;
-  }
-  
-  .landing-header h1 {
-    font-size: 2.5rem;
-    color: #333333;
-    margin-bottom: 0.5rem;
-  }
-  
-  .landing-header p {
-    font-size: 1.125rem;
-    color: #666666;
-  }
-  
-  .landing-main {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-    width: 100%;
-    max-width: 800px;
-  }
-  
-  .landing-card {
-    background: #f7f7f7;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  
-  .landing-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .card-content {
-    padding: 1.5rem;
-    text-align: center;
-  }
-  
-  .card-content h2 {
-    margin-bottom: 0.5rem;
-    color: #333333;
-  }
-  
-  .card-content p {
-    color: #555555;
-    font-size: 0.875rem;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 2rem;
+  background: var(--bg-secondary);
+  min-height: 100vh;
+}
+
+.landing-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.landing-header h1 {
+  font-size: 3rem;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.landing-header p {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.landing-main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.landing-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.landing-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  border-color: var(--accent-primary);
+}
+
+.card-content {
+  padding: 2rem;
+  text-align: left;
+}
+
+.card-content h2 {
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.card-content p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
